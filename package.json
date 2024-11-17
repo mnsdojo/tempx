@@ -1,0 +1,22 @@
+{
+  "name": "tempx",
+  "module": "index.ts",
+  "type": "module",
+  "bin": {
+    "tempx": "./index.ts"
+  },
+  "devDependencies": {
+    "@types/bun": "latest",
+    "@types/inquirer": "^9.0.7"
+  },
+  "peerDependencies": {
+    "typescript": "^5.0.0"
+  },
+  "dependencies": {
+    "@octokit/rest": "^21.0.2",
+    "commander": "^12.1.0",
+    "inquirer": "^12.1.0",
+    "picocolors": "^1.1.1",
+    "simple-git": "^3.27.0"
+  }
+}

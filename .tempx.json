@@ -1,0 +1,5 @@
+{
+  "username": "mnsdojo",
+  "defaultBranch": "main",
+  "installCommand": "bun install"
+}
