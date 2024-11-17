@@ -16,7 +16,6 @@
     "@octokit/rest": "^21.0.2",
     "commander": "^12.1.0",
     "inquirer": "^12.1.0",
-    "picocolors": "^1.1.1",
-    "simple-git": "^3.27.0"
+    "picocolors": "^1.1.1"
   }
 }

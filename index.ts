@@ -154,8 +154,7 @@ async function loadTemplates(username: string): Promise<Templates> {
  * @returns Promise<string> Selected template name
  */
 async function selectTemplate(templates: Templates): Promise<string> {
-  const choices = Object.entries(templates).map(([name, info]) => ({
-    name: `${name} (Last updated: ${new Date(
+  const choices = Object.entries(templates).map(([name, info]) => ({ name: `${name} (Last updated: ${new Date(
       info.updatedAt
     ).toLocaleDateString()})`,
     value: name,
