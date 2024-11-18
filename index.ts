@@ -10,7 +10,7 @@ import inquirer from "inquirer";
 import { cloneRepository, installDependencies } from "./utils";
 
 /**
- * Configuration structure for the CLI
+ * Represents the configuration settings for the CLI.
  */
 interface Config {
   username: string; // GitHub username
@@ -19,7 +19,7 @@ interface Config {
 }
 
 /**
- * Command line options interface
+ * Defines optoins for cli commands
  */
 interface CommandOptions {
   install?: boolean; // Flag to install dependencies
@@ -48,7 +48,7 @@ const DEFAULT_CONFIG: Config = {
 
 // === Configuration Management ===
 /**
- * Loads configuration from file or returns default config
+ * Loads config from file or returns default config
  * @returns Promise<Config> Configuration object
  */
 async function loadConfig(): Promise<Config> {
@@ -116,7 +116,6 @@ async function configureInteractive(): Promise<void> {
  */
 async function loadTemplates(username: string): Promise<Templates> {
   try {
-    // Fetch user's repositories from GitHub
     const { data: repositories } = await octokit.repos.listForUser({
       username,
       type: "all",
