@@ -7,8 +7,8 @@ import { existsSync } from "fs";
 import { dirname, resolve } from "path";
 import { blue, green, red, yellow } from "picocolors";
 import inquirer from "inquirer";
+import { cloneRepository, installDependencies } from "./utils";
 
-// === Type Definitions ===
 /**
  * Configuration structure for the CLI
  */
@@ -34,7 +34,6 @@ interface TemplateInfo {
   updatedAt: string; // Last update timestamp
 }
 
-// Type alias for template collection
 type Templates = Record<string, TemplateInfo>;
 
 // === Constants ===
@@ -154,7 +153,8 @@ async function loadTemplates(username: string): Promise<Templates> {
  * @returns Promise<string> Selected template name
  */
 async function selectTemplate(templates: Templates): Promise<string> {
-  const choices = Object.entries(templates).map(([name, info]) => ({ name: `${name} (Last updated: ${new Date(
+  const choices = Object.entries(templates).map(([name, info]) => ({
+    name: `${name} (Last updated: ${new Date(
       info.updatedAt
     ).toLocaleDateString()})`,
     value: name,
@@ -169,45 +169,6 @@ async function selectTemplate(templates: Templates): Promise<string> {
     },
   ]);
   return templateName;
-}
-
-// === Repository Operations ===
-/**
- * Clones a repository to the specified directory
- * @param url Repository URL
- * @param targetDir Target directory
- * @returns Promise<boolean> Success status
- */
-async function cloneRepository(
-  url: string,
-  targetDir: string
-): Promise<boolean> {
-  try {
-    console.log(blue(`Cloning repository to ${targetDir}...`));
-    await $`git clone ${url} ${targetDir}`;
-    return true;
-  } catch (error) {
-    console.error(red(`Error cloning repository: ${(error as Error).message}`));
-    return false;
-  }
-}
-
-/**
- * Installs dependencies in the specified directory
- * @param directory Target directory
- * @returns Promise<boolean> Success status
- */
-async function installDependencies(directory: string): Promise<boolean> {
-  try {
-    console.log(blue("Installing dependencies..."));
-    await $`cd ${directory} && bun install`;
-    return true;
-  } catch (error) {
-    console.error(
-      red(`Error installing dependencies: ${(error as Error).message}`)
-    );
-    return false;
-  }
 }
 
 /**
