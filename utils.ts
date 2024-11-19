@@ -9,6 +9,8 @@ export async function detectPackageManager(directory: string): Promise<string> {
   if (existsSync(path.join(directory, "yarn.lock"))) return "npm";
   if (existsSync(path.join(directory, "pnpm-lock.yaml"))) return "npm";
   if (existsSync(path.join(directory, "bun.lockb"))) return "npm";
+  if (existsSync(path.join(directory, "Cargo.toml"))) return "cargo";
+  if (existsSync(path.join(directory, "go.mod"))) return "go";
 
   return "bun";
 }
@@ -41,9 +43,18 @@ export async function installDependencies(directory: string): Promise<boolean> {
       case "yarn":
         await $`cd ${directory} && yarn install`;
         break;
+      case "cargo": // Rust
+        await $`cd ${directory} && cargo build`;
+        break;
+      case "go": // Go
+        await $`cd ${directory} && go mod tidy`;
+        break;
       case "bun":
         await $`cd ${directory} && bun install`;
         break;
+      default:
+        console.log(red(`Unknown package manager: ${packageManager}`));
+        return false;
     }
     return true;
   } catch (error) {
