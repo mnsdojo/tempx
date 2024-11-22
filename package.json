@@ -1,9 +1,14 @@
 {
-  "name": "tempx",
-  "module": "index.ts",
+  "name": "@mnscodes/tempx",
+  "version": "1.0.0",
   "type": "module",
+  "module": "./index.ts",
   "bin": {
     "tempx": "./index.ts"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/mnsdojo/tempx.git"
   },
   "devDependencies": {
     "@types/bun": "latest",
